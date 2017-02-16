@@ -24,6 +24,7 @@ def plot( screen, color, x, y ):
     newy = YRES - 1 - y
     if ( x >= 0 and x < XRES and newy >= 0 and newy < YRES ):
         screen[newy][x] = color[:]
+    return screen
 
 def clear_screen( screen ):
     for y in range( len(screen) ):
@@ -31,8 +32,9 @@ def clear_screen( screen ):
             screen[y][x] = DEFAULT_COLOR[:]
 
 def save_ppm( screen, fname ):
-    f = open( fname, 'w' )
+    f = open( fname, "w" )
     ppm = 'P3\n' + str(len(screen[0])) +' '+ str(len(screen)) +' '+ str(MAX_COLOR) +'\n'
+    
     for y in range( len(screen) ):
         row = ''
         for x in range( len(screen[y]) ):
@@ -41,6 +43,7 @@ def save_ppm( screen, fname ):
             row+= str( pixel[ GREEN ] ) + ' '
             row+= str( pixel[ BLUE ] ) + ' '
         ppm+= row + '\n'
+    print "Saving as pic.ppm... See that for image!" 
     f.write( ppm )
     f.close()
 
@@ -51,9 +54,12 @@ def save_extension( screen, fname ):
     p.communicate()
     remove(ppm_name)
 
+'''
 def display( screen ):
     ppm_name = 'pic.ppm'
     save_ppm( screen, ppm_name )
     Popen( ['display', ppm_name], stdin=PIPE, stdout = PIPE )
+'''
+
 
 
