@@ -1,5 +1,6 @@
 from subprocess import Popen, PIPE
 from os import remove
+import os
 
 #constants
 XRES = 500
@@ -48,11 +49,12 @@ def save_ppm( screen, fname ):
     f.close()
 
 def save_extension( screen, fname ):
-    ppm_name = fname[:fname.find('.')] + '.ppm'
+    ppm_name = "pic.ppm"
     save_ppm( screen, ppm_name )
-    p = Popen( ['convert', ppm_name, fname ], stdin=PIPE, stdout = PIPE )
-    p.communicate()
-    remove(ppm_name)
+    #p = Popen( ['convert', ppm_name, fname ], stdin=PIPE, stdout = PIPE )
+    #p.communicate()
+    #os.system("convert " + ppm_name + fname)
+    #remove(ppm_name)
 
 '''
 def display( screen ):
